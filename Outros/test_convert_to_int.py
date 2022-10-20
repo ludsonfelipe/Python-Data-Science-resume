@@ -4,16 +4,19 @@ from function import convert_to_int
 
 # testing if when we have a value with dot instead of comma we have problems
 def test_convert_to_dot():
+    """In this exemplae we tried to simulate an error that doesn't pass in the unit test"""
     assert convert_to_int('293.93') == None, "Não aceitamos mensagens com pontos em vez de virgula"
 
 
 # test if the value is correct
 def test_convert_to_int():
+    """In this exemple we tried to simulate an error that pass in the unit test"""
     assert convert_to_int('294,34') == 29434
 
 
 # We can put more than one assert in the function
 def test_convert_to_large_int():
+    """In this example we tried to simulate two asserts in one function"""
     value = convert_to_int('294,331234')
     assert type(value) == int,"O Tipo de dado também deu certo"
     assert value  == 294331234, "O valor deu certo"
@@ -27,4 +30,4 @@ def test_value_error():
     with pytest.raises(AttributeError) as message_error:
         value = convert_to_int(value_to_test)
     assert message_error.match('O valor passado para função deve ser uma string, a lista não tem o atributo replace')
-    
+
