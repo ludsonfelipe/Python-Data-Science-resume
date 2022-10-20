@@ -1,14 +1,19 @@
+import sys
+my_project = 'C:\\Users\\felip\\Desktop\\github\\estudos_felipe\\Outros\\TDI_tests_structure'
+paths = sys.path.append(my_project)
+
 # Objetivos
 # receber 3 inputs
 # criamos 3 tipos de testes 
 # - Bad arguments (argumentos que testam error)| Special arguments (Argumentos que testam resultados impossiveis) | Normal arguments (argumentos que testam resultados possiveis)
 # dentro de cada classe, vai ter varios testes para uma função
 
+
+from functions_to_projects.collect_functions.collect_imc import collect_name
+
 import pytest
-from TDI_tests_structure.functions_to_projects.collect_functions.collect_imc import collect_name 
-#, collect_info
-collect_name('test')
-"""class TestCollectName(object):
+
+class TestCollectName(object):
     # Normal Tests
     def test_name_capitalize(self):
         actual = collect_name('JoN')
@@ -36,10 +41,10 @@ collect_name('test')
     
     # Bad Test
     def test_name_is_not_string(self):
-        with pytest.raises(AttributeError) as message_error:
-            actual = collect_name(3121)
-        assert message_error.match('The input needs to be a string')
-        """
+        with pytest.raises(TypeError) as message_error:
+            actual = collect_name()
+        assert message_error.match(r"collect_name\(\) missing 1 required positional argument: 'name'")
+        
 
 
 
