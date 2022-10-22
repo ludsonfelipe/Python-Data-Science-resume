@@ -32,3 +32,6 @@ def collect_metrics(weight, height):
 
     except:
         return None
+
+def others():
+    pass

@@ -9,10 +9,11 @@ paths = sys.path.append(my_project)
 # dentro de cada classe, vai ter varios testes para uma função
 
 
-from functions_to_projects.collect_functions.collect_imc import collect_name,collect_metrics
+from functions_to_projects.collect_functions.collect_imc import collect_name,collect_metrics,others
 
 import pytest
 
+# we can import three kinds of functions from the same file in the same test file, but we need to separate it in class
 class TestCollectName(object):
     # Normal Tests
     def test_name_capitalize(self):
@@ -48,8 +49,8 @@ class TestCollectName(object):
         with pytest.raises(TypeError) as message_error:
             actual = collect_name()
         assert message_error.match(r"collect_name\(\) missing 1 required positional argument: 'name'")
-        
-
+    
+# other example of metrics
 class TestCollectMetrics(object):
     def test_weight_type(self):
         actual = collect_metrics(65.4,1.60)
@@ -57,22 +58,26 @@ class TestCollectMetrics(object):
         assert actual == expected, f'actual value: {actual} expected value: {expected}'
 
     def test_height(self):
-        actual = collect_metrics(20,4)
+        actual = collect_metrics(1001,1.75)
         expected = 'O peso inserido na calculadora não pode ser maior que 1000 ou menor que 0.1'
         assert actual == expected, f'actual value: {actual} expected value: {expected}'
 
     def test_weight(self):
-        actual = collect_metrics(1001,1.75)
+        actual = collect_metrics(20,4)
         expected = 'A altura inserida na calculadora não pode ser maior que 3 metros ou menor que 0.1'
         assert actual == expected, f'actual value: {actual} expected value: {expected}'
 
     def test_weight(self):
-        actual = collect_metrics()
-        expected = None
-        assert actual == expected, f'actual value: {actual} expected value: {expected}'
+        with pytest.raises(TypeError) as message_error:
+            actual = collect_metrics()
+        
+        assert message_error.match(r"collect_metrics\(\) missing 2 required positional arguments: 'weight' and 'height'")
 
-    def test_insuficient_values(self):
-        actual = collect_metrics(1.75)
-        expected = None
-        assert actual == expected, f'actual value: {actual} expected value: {expected}'
 
+# This decorators is utils when we need to accept a fail test, that we havent written yet
+@pytest.mark.xfail(reason='fuction not implemented yet') # we can use @pytest.mark.skipif too, if we know which kind of problems we will receive, @pytest.mark.skipif(sys.version_info > (3, 3), reason = 'requeries python in a version below 3.3')
+class TestOthers(object):
+    def test_others(self):
+        actual = others('outra info')
+        expected = 'outra info'
+        assert actual == expected, f'actual value: {actual} expected value {expected}'
