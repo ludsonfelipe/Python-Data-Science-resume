@@ -31,3 +31,5 @@ def test_value_error():
         value = convert_to_int(value_to_test)
     assert message_error.match('O valor passado para função deve ser uma string, a lista não tem o atributo replace')
 
+def xd ():
+    pass
